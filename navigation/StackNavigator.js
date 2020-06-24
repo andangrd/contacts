@@ -1,11 +1,11 @@
 import React from 'react';
-import { TouchableOpacity, Button } from 'react-native'
 import { connect } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import Screens from './Screens';
 import { Colors } from '../Themes';
 import HomeScreen from '../screens/HomeScreen/Home.screen';
 import ContacDetails from '../screens/ContactDetails/ContactDetails.screen';
+import ContactDetailsEdit from '../screens/ContactDetailsEdit/ContactDetailsEdit.screen';
 
 
 
@@ -19,8 +19,12 @@ export function StactNavigator(props) {
             <Stack.Screen name={ Screens.HomeScreen } options={ { title: 'Contacts' } } component={ HomeScreen } />
             <Stack.Screen
                 name={ Screens.ContacDetails }
-                initialParams={ { contactId: '0' } }
                 component={ ContacDetails }
+
+            />
+            <Stack.Screen
+                name={ Screens.ContactDetailsEdit }
+                component={ ContactDetailsEdit }
 
             />
 

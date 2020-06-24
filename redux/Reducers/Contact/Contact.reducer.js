@@ -1,17 +1,19 @@
 import { createAction } from 'redux-actions';
 import typeToReducer from 'type-to-reducer';
-import { getContacts, getContactDetail } from '../../../services/Contact/Contact.service'
+import { getContacts, getContactDetail, updateContactDetail } from '../../../services/Contact/Contact.service'
 
 
 // ------------------------------------
 // Constants
 // ------------------------------------
 const GET_CONTACT_LIST = 'CONTACT/GET_CONTACT_LIST';
-const GET_ACCOUNT_DETAILS = 'CONTACT/GET_ACCOUNT_DETAILS';
+const GET_CONTACT_DETAILS = 'CONTACT/GET_CONTACT_DETAILS';
+const UPDATE_CONTACT_DETAILS = 'CONTACT/GET_CONTACT_DETAILS';
 
 export const actionTypes = {
     GET_CONTACT_LIST,
-    GET_ACCOUNT_DETAILS
+    GET_CONTACT_DETAILS,
+    UPDATE_CONTACT_DETAILS
 };
 
 // ------------------------------------
@@ -19,11 +21,13 @@ export const actionTypes = {
 // ------------------------------------
 // export const getContactList = createAction(GET_CONTACT_LIST, (list) => Promise.resolve(list));
 export const getContactList = createAction(GET_CONTACT_LIST, getContacts);
-export const getContactDetails = createAction(GET_ACCOUNT_DETAILS, getContactDetail);
+export const getContactDetails = createAction(GET_CONTACT_DETAILS, getContactDetail);
+export const updateContact = createAction(UPDATE_CONTACT_DETAILS, updateContactDetail);
 
 export const actions = {
     getContactList,
-    getContactDetails
+    getContactDetails,
+    updateContact
 };
 
 
@@ -39,8 +43,7 @@ export const initialState = {
         id: '',
         firstName: '',
         lastName: '',
-        age: '',
-        photo: 'http://localhost/img.jpg'
+        age: ''
     },
 };
 
@@ -53,7 +56,6 @@ const setIsLoading = (state, action) => {
 }
 
 const getContactListSuccessHandler = (state, action) => {
-    console.log(action);
 
     return {
         ...state,
@@ -75,8 +77,6 @@ const getContactListErrorHandler = (state) => ({
 });
 
 const getContactDetailSuccessHandler = (state, action) => {
-    console.log(action);
-
     return {
         ...state,
         contactDetails: action.payload,
@@ -92,6 +92,20 @@ const getContactDetailErrorHandler = (state) => ({
     isLoading: false,
 });
 
+
+const updateContactDetailSuccessHandler = (state, action) => {
+    return {
+        ...state,
+        contactDetails: action.payload,
+        isLoading: false,
+    }
+};
+
+const updateContactDetailErrorHandler = (state) => ({
+    ...state,
+    isLoading: false,
+});
+
 // type to reducers
 export default typeToReducer({
     [GET_CONTACT_LIST]: {
@@ -99,12 +113,14 @@ export default typeToReducer({
         PENDING: setIsLoading,
         REJECTED: getContactListErrorHandler
     },
-    [GET_ACCOUNT_DETAILS]: {
+    [GET_CONTACT_DETAILS]: {
         FULFILLED: getContactDetailSuccessHandler,
         PENDING: setIsLoading,
         REJECTED: getContactDetailErrorHandler
     },
-    // [SET_QUERY]: {
-    //     FULFILLED: setQueryHandler
-    // }
+    [UPDATE_CONTACT_DETAILS]: {
+        FULFILLED: updateContactDetailSuccessHandler,
+        PENDING: setIsLoading,
+        REJECTED: updateContactDetailErrorHandler
+    },
 }, initialState);

@@ -28,17 +28,14 @@ export default StyleSheet.create({
             },
         }
     }),
+    formContainer: {
+        backgroundColor: '#fff',
+        padding: 20
+    },
     contactContainer: {
         paddingTop: 10,
         backgroundColor: '#fff',
         alignItems: 'center'
-    },
-    accountName: {
-        textAlign: 'center',
-        alignSelf: 'center',
-        fontSize: 38,
-        color: Colors.white,
-        marginTop: 30
     },
     imageProfile: {
         top: 0,
@@ -46,6 +43,13 @@ export default StyleSheet.create({
         height: 157,
         borderRadius: 100,
         left: 0
+    },
+    accountName: {
+        textAlign: 'center',
+        alignSelf: 'center',
+        fontSize: 38,
+        color: Colors.white,
+        marginTop: 30
     },
     contentContainerStyle: {
         paddingLeft: 10

@@ -52,33 +52,10 @@ const mockData = [
     }
 ]
 export const getContacts = async () => {
-    return Promise.resolve(mockData);
+    // return Promise.resolve(mockData);
 
-    // return axios.get(
-    //     '/contact',
-    //     generateConfig({})
-    // )
-    //     .then((res) => { return res.data.data })
-    //     .catch((error) => {
-    //         console.log(error)
-    //         const errorData = (error.response && error.response.data) || {};
-    //         const status = (error.response && error.response.status) || 'Error';
-
-    //         const formattedErrorData = {
-    //             ...errorData,
-    //             status
-    //         }
-
-    //         throw formattedErrorData;
-    //     });
-};
-
-export const getContactDetail = async (id) => {
-    console.log('HAHAHAHAHAHA ', id)
-
-    return Promise.resolve(mockData[1]);
     return axios.get(
-        '/contact/' + id,
+        '/contact',
         generateConfig({})
     )
         .then((res) => { return res.data.data })
@@ -93,5 +70,50 @@ export const getContactDetail = async (id) => {
             }
 
             throw formattedErrorData;
+        });
+};
+
+export const getContactDetail = async (id) => {
+
+    // return Promise.resolve(mockData[1]);
+    return axios.get(
+        '/contact/' + id,
+        generateConfig({})
+    )
+        .then((res) => { return res.data.data })
+        .catch((error) => {
+            console.log(error)
+
+            throw formatErrorResponse(error)
+        });
+};
+
+const formatErrorResponse = (error) => {
+    const errorData = (error.response && error.response.data) || {};
+    const status = (error.response && error.response.status) || 'Error';
+
+    const formattedErrorData = {
+        ...errorData,
+        status
+    }
+
+    return formattedErrorData
+}
+
+export const updateContactDetail = async (data) => {
+    const id = data.id;
+    if (!id) throw formatErrorResponse({});
+
+    delete data.id;
+    return axios.put(
+        '/contact/' + id,
+        data,
+        generateConfig({})
+    )
+        .then((res) => { return res.data.data })
+        .catch((error) => {
+            console.log(error)
+
+            throw formatErrorResponse(error);
         });
 };

@@ -1,46 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Text, View, Button, Image } from 'react-native';
-import { Avatar, ListItem } from 'react-native-elements';
+import { Avatar, Input } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { ScrollView } from 'react-native-gesture-handler';
-import { Colors } from '../../Themes';
 import Spinner from 'react-native-loading-spinner-overlay';
+import { ScrollView } from 'react-native-gesture-handler';
 
-import styles from './ContactDetails.style';
+import { Colors } from '../../Themes';
+import styles from './ContactDetailsEdit.style';
 
 
 import { actions as ContactReducerActions } from '../../redux/Reducers/Contact/Contact.reducer';
 
 
 
-const ContactDetails = (props) => {
+const ContactDetailsEdit = (props) => {
 
-    const { getContactDetails, contactDetails, route, navigation } = props;
+    const { getContactDetails, contactDetails, route, navigation, updateContact } = props;
     const { contactId } = route.params;
+
+    const [formData, setFormData] = React.useState({});
+
+    const updateContactDetails = () => updateContact(formData).then(() => navigation.goBack());
+
+    const handleChange = (key, value) => {
+        const contactDetailsCopy = { ...contactDetails };
+        contactDetailsCopy[key] = value;
+        setFormData(contactDetailsCopy);
+    };
 
     React.useEffect(() => {
         (contactId != '0') && getContactDetails(contactId);
-    }, [])
-
+    }, []);
 
     React.useLayoutEffect(() => {
         navigation.setOptions({
             headerTitle: 'Contact Detail',
-            headerRight: () => (
-                <View style={ { marginRight: 10 } }>
-                    <Button
-                        onPress={ () => navigation.push('contactdetailsedit', {
-                            contactId
-                        }) }
-                        title="Edit"
-                        color={ Colors.diiLightSalmon }
-                    />
-                </View>
-
+            headerRight: () => (<View style={ { marginRight: 10 } }>
+                <Button
+                    onPress={ updateContactDetails }
+                    title="Save"
+                    color={ Colors.diiOrangeRed }
+                />
+            </View>
             ),
         });
-    }, [navigation]);
-    console.log(contactDetails.photo);
+    }, [navigation, formData]);
 
     return (< View style={ styles.container } >
 
@@ -59,36 +63,29 @@ const ContactDetails = (props) => {
                 </Text>
             </View>
 
-            <RenderDetails contactDetails={ contactDetails } />
+            <RenderDetails contactDetails={ contactDetails } handleChange={ handleChange } />
         </ScrollView>
     </View >);
 }
 
 
-const RenderDetails = ({ contactDetails }) => {
+const RenderDetails = ({ contactDetails, handleChange }) => {
     const restrictedData = ['photo', 'id'];
 
-    return (<View >
+    return (<View style={ styles.formContainer } >
         {
             Object.keys(contactDetails).map((fieldName, i) => (
                 !restrictedData.includes(fieldName)
-                && <ListItem
+                && <Input
                     key={ fieldName + i }
-                    title={ fieldName }
-                    titleStyle={ styles.titleStyle }
-                    subtitle={ contactDetails[fieldName].toString() }
-                    subtitleStyle={ styles.subtitleStyle }
-                    contentContainerStyle={ styles.contentContainerStyle }
-                    bottomDivider
+                    label={ fieldName }
+                    defaultValue={ contactDetails[fieldName].toString() }
+                    onChangeText={ text => handleChange(fieldName, text) }
                 />
             ))
         }
     </View>)
 }
-
-// ContactDetails.navigationOptions = screenProps => ({
-
-// })
 
 const mapStateToProps = state => ({
     contactDetails: state.contact.contactDetails,
@@ -97,7 +94,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     getContactDetails: ContactReducerActions.getContactDetails,
+    updateContact: ContactReducerActions.updateContact
 }
 
 // added null since there is no mapDispatchToProps for now.
-export default connect(mapStateToProps, mapDispatchToProps)(ContactDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactDetailsEdit);

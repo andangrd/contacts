@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { ListItem } from 'react-native-elements';
@@ -25,7 +25,7 @@ const ContactList = (props) => {
     }, [])
 
     const _listItemPressCallback = (props, item) => {
-        return props.navigation.push('contactdetails', {
+        return props.navigation.navigate('contactdetails', {
             contactId: item.id
         })
     }
