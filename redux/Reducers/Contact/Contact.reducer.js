@@ -1,6 +1,11 @@
 import { createAction } from 'redux-actions';
 import typeToReducer from 'type-to-reducer';
-import { getContacts, getContactDetail, updateContactDetail } from '../../../services/Contact/Contact.service'
+import {
+    getContacts,
+    getContactDetail,
+    updateContactDetail,
+    deleteContactById
+} from '../../../services/Contact/Contact.service'
 
 
 // ------------------------------------
@@ -9,11 +14,13 @@ import { getContacts, getContactDetail, updateContactDetail } from '../../../ser
 const GET_CONTACT_LIST = 'CONTACT/GET_CONTACT_LIST';
 const GET_CONTACT_DETAILS = 'CONTACT/GET_CONTACT_DETAILS';
 const UPDATE_CONTACT_DETAILS = 'CONTACT/GET_CONTACT_DETAILS';
+const DELETE_CONTACT = 'CONTACT/DELETE_CONTACT';
 
 export const actionTypes = {
     GET_CONTACT_LIST,
     GET_CONTACT_DETAILS,
-    UPDATE_CONTACT_DETAILS
+    UPDATE_CONTACT_DETAILS,
+    DELETE_CONTACT
 };
 
 // ------------------------------------
@@ -23,11 +30,13 @@ export const actionTypes = {
 export const getContactList = createAction(GET_CONTACT_LIST, getContacts);
 export const getContactDetails = createAction(GET_CONTACT_DETAILS, getContactDetail);
 export const updateContact = createAction(UPDATE_CONTACT_DETAILS, updateContactDetail);
+export const deleteContact = createAction(DELETE_CONTACT, deleteContactById);
 
 export const actions = {
     getContactList,
     getContactDetails,
-    updateContact
+    updateContact,
+    deleteContact
 };
 
 
@@ -106,6 +115,18 @@ const updateContactDetailErrorHandler = (state) => ({
     isLoading: false,
 });
 
+const deleteContactSuccessHandler = (state, action) => {
+    return {
+        ...state,
+        isLoading: false,
+    }
+};
+
+const deleteContactErrorHandler = (state) => ({
+    ...state,
+    isLoading: false,
+});
+
 // type to reducers
 export default typeToReducer({
     [GET_CONTACT_LIST]: {
@@ -122,5 +143,10 @@ export default typeToReducer({
         FULFILLED: updateContactDetailSuccessHandler,
         PENDING: setIsLoading,
         REJECTED: updateContactDetailErrorHandler
+    },
+    [DELETE_CONTACT]: {
+        FULFILLED: deleteContactSuccessHandler,
+        PENDING: setIsLoading,
+        REJECTED: deleteContactErrorHandler
     },
 }, initialState);

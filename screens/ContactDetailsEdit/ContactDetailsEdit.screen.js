@@ -39,7 +39,7 @@ const ContactDetailsEdit = (props) => {
                 <Button
                     onPress={ updateContactDetails }
                     title="Save"
-                    color={ Colors.diiOrangeRed }
+                    color={ Colors.diiDarkSeaGreen }
                 />
             </View>
             ),

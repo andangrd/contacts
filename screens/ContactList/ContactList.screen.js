@@ -1,28 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import { View } from 'react-native';
+import { View, Button } from 'react-native';
 import { connect } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { ListItem } from 'react-native-elements';
 
 import styles from './ContactList.style';
+import { Colors } from '../../Themes';
 
 
 import { actions as ContactReducerActions } from '../../redux/Reducers/Contact/Contact.reducer';
 
-const _listItemPressCallback = (props, item) => {
-    return props.navigation.push('ContactDetatils', {
-        itemId: item.id
-    })
-}
 
 const ContactList = (props) => {
 
-    const { getContacts, contactList } = props
+    const { getContacts, contactList, deleteContact, navigation } = props
 
     React.useEffect(() => {
-        getContacts();
+        getContacts()
     }, [])
+
+
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (<View style={ { marginRight: 10 } }>
+                <Button
+                    onPress={ () => navigation.navigate('newcontact') }
+                    title="Add New"
+                    color={ Colors.diiFacebookBlue }
+                />
+            </View>
+            ),
+        });
+    }, [navigation]);
 
     const _listItemPressCallback = (props, item) => {
         return props.navigation.navigate('contactdetails', {
@@ -44,12 +54,25 @@ const ContactList = (props) => {
                     leftAvatar={ { source: { uri: contactDetail.photo } } }
                     title={ contactDetail.firstName }
                     contentContainerStyle={ styles.contentContainerStyle }
+                    rightTitle={ <DeletButton
+                        deleteContact={ deleteContact }
+                        contactId={ contactDetail.id }
+                        refreshScreen={ getContacts }
+                    /> }
                     onPress={ () => _listItemPressCallback(props, contactDetail) }
                     bottomDivider
                 />
             ))
         }
     </View >);
+}
+
+const DeletButton = (props) => {
+    return (<Button
+        color={ Colors.diiOrangeRed }
+        title='Delete'
+        onPress={ () => props.deleteContact(props.contactId).then(() => refreshScreen()) }
+    />)
 }
 
 
@@ -60,6 +83,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     getContacts: ContactReducerActions.getContactList,
+    deleteContact: ContactReducerActions.deleteContact,
 }
 
 // added null since there is no mapDispatchToProps for now.
