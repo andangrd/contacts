@@ -4,7 +4,8 @@ import {
     getContacts,
     getContactDetail,
     updateContactDetail,
-    deleteContactById
+    deleteContactById,
+    addNewContact
 } from '../../../services/Contact/Contact.service'
 
 
@@ -14,12 +15,14 @@ import {
 const GET_CONTACT_LIST = 'CONTACT/GET_CONTACT_LIST';
 const GET_CONTACT_DETAILS = 'CONTACT/GET_CONTACT_DETAILS';
 const UPDATE_CONTACT_DETAILS = 'CONTACT/GET_CONTACT_DETAILS';
+const SAVE_NEW_CONTACT = 'CONTACT/SAVE_NEW_CONTACT';
 const DELETE_CONTACT = 'CONTACT/DELETE_CONTACT';
 
 export const actionTypes = {
     GET_CONTACT_LIST,
     GET_CONTACT_DETAILS,
     UPDATE_CONTACT_DETAILS,
+    SAVE_NEW_CONTACT,
     DELETE_CONTACT
 };
 
@@ -30,12 +33,14 @@ export const actionTypes = {
 export const getContactList = createAction(GET_CONTACT_LIST, getContacts);
 export const getContactDetails = createAction(GET_CONTACT_DETAILS, getContactDetail);
 export const updateContact = createAction(UPDATE_CONTACT_DETAILS, updateContactDetail);
+export const saveNewContact = createAction(SAVE_NEW_CONTACT, addNewContact);
 export const deleteContact = createAction(DELETE_CONTACT, deleteContactById);
 
 export const actions = {
     getContactList,
     getContactDetails,
     updateContact,
+    saveNewContact,
     deleteContact
 };
 
@@ -54,6 +59,12 @@ export const initialState = {
         lastName: '',
         age: ''
     },
+    newContactData: {
+        firstName: '',
+        lastName: '',
+        age: '',
+        photo: ''
+    }
 };
 
 
@@ -115,6 +126,19 @@ const updateContactDetailErrorHandler = (state) => ({
     isLoading: false,
 });
 
+const saveNewContactSuccessHandler = (state, action) => {
+    return {
+        ...state,
+        contactDetails: action.payload,
+        isLoading: false,
+    }
+};
+
+const saveNewContactErrorHandler = (state) => ({
+    ...state,
+    isLoading: false,
+});
+
 const deleteContactSuccessHandler = (state, action) => {
     return {
         ...state,
@@ -143,6 +167,11 @@ export default typeToReducer({
         FULFILLED: updateContactDetailSuccessHandler,
         PENDING: setIsLoading,
         REJECTED: updateContactDetailErrorHandler
+    },
+    [SAVE_NEW_CONTACT]: {
+        FULFILLED: saveNewContactSuccessHandler,
+        PENDING: setIsLoading,
+        REJECTED: saveNewContactErrorHandler
     },
     [DELETE_CONTACT]: {
         FULFILLED: deleteContactSuccessHandler,

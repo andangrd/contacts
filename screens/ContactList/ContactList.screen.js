@@ -25,7 +25,7 @@ const ContactList = (props) => {
         navigation.setOptions({
             headerRight: () => (<View style={ { marginRight: 10 } }>
                 <Button
-                    onPress={ () => navigation.navigate('newcontact') }
+                    onPress={ () => navigation.navigate('addnewcontact') }
                     title="Add New"
                     color={ Colors.diiFacebookBlue }
                 />

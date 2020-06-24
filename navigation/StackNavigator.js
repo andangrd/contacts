@@ -6,6 +6,7 @@ import { Colors } from '../Themes';
 import HomeScreen from '../screens/HomeScreen/Home.screen';
 import ContacDetails from '../screens/ContactDetails/ContactDetails.screen';
 import ContactDetailsEdit from '../screens/ContactDetailsEdit/ContactDetailsEdit.screen';
+import AddNewContact from '../screens/AddNewContact/AddNewContact.screen';
 
 
 
@@ -25,6 +26,11 @@ export function StactNavigator(props) {
             <Stack.Screen
                 name={ Screens.ContactDetailsEdit }
                 component={ ContactDetailsEdit }
+
+            />
+            <Stack.Screen
+                name={ Screens.AddNewContact }
+                component={ AddNewContact }
 
             />
 

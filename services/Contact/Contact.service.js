@@ -66,6 +66,22 @@ export const updateContactDetail = async (data) => {
         });
 };
 
+export const addNewContact = async (data) => {
+    console.log(data);
+
+    return axios.post(
+        '/contact',
+        data,
+        generateConfig({})
+    )
+        .then((res) => { return res.data.data })
+        .catch((error) => {
+            console.log(error)
+
+            throw formatErrorResponse(error);
+        });
+};
+
 export const deleteContactById = async (id) => {
     if (!id) throw formatErrorResponse({});
 
