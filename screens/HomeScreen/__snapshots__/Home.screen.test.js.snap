@@ -1,0 +1,202 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#F4F1DE",
+      "flex": 1,
+    }
+  }
+>
+  <RCTScrollView
+    collapsable={false}
+    contentContainerStyle={
+      Object {
+        "paddingTop": 30,
+      }
+    }
+    keyboardShouldPersistTaps="handled"
+    onGestureHandlerEvent={[Function]}
+    onGestureHandlerStateChange={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#F4F1DE",
+        "flex": 1,
+      }
+    }
+  >
+    <View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "marginVertical": 50,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "marginBottom": 10,
+              "marginTop": 10,
+            }
+          }
+        >
+          <Text />
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "marginHorizontal": 70,
+            "marginVertical": 30,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flex": 1,
+              "left": 0,
+              "position": "relative",
+              "right": 0,
+              "top": 0,
+              "zIndex": 100,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "zIndex": 1,
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "borderColor": "#b9b9b9",
+                    "borderRadius": 1,
+                    "borderWidth": 1,
+                  },
+                  Object {
+                    "alignItems": "stretch",
+                    "alignSelf": "stretch",
+                    "backgroundColor": "white",
+                    "borderRadius": 20,
+                    "flex": 1,
+                    "flexDirection": "row",
+                    "height": 40,
+                    "justifyContent": "center",
+                    "paddingLeft": 3,
+                  },
+                ]
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "stretch",
+                    "alignSelf": "stretch",
+                    "backgroundColor": "white",
+                    "borderRadius": 20,
+                    "flex": 1,
+                    "flexDirection": "row",
+                    "height": 40,
+                    "justifyContent": "center",
+                    "paddingLeft": 3,
+                  }
+                }
+              >
+                <TextInput
+                  allowFontScaling={true}
+                  collapsable={false}
+                  data={Array []}
+                  flatListProps={Object {}}
+                  hideResults={true}
+                  inputContainerStyle={
+                    Object {
+                      "alignItems": "stretch",
+                      "alignSelf": "stretch",
+                      "backgroundColor": "white",
+                      "borderRadius": 20,
+                      "flex": 1,
+                      "flexDirection": "row",
+                      "height": 40,
+                      "justifyContent": "center",
+                      "paddingLeft": 3,
+                    }
+                  }
+                  keyExtractor={[Function]}
+                  keyboardShouldPersistTaps="always"
+                  listContainerStyle={
+                    Object {
+                      "flex": 1,
+                    }
+                  }
+                  onBlur={[Function]}
+                  onChangeText={[Function]}
+                  onEndEditing={[Function]}
+                  onFocus={[Function]}
+                  onGestureHandlerEvent={[Function]}
+                  onGestureHandlerStateChange={[Function]}
+                  onStartShouldSetResponderCapture={[Function]}
+                  rejectResponderTermination={true}
+                  renderItem={[Function]}
+                  renderSeparator={null}
+                  renderTextInput={[Function]}
+                  style={
+                    Object {
+                      "alignItems": "flex-start",
+                      "justifyContent": "space-around",
+                      "width": "80%",
+                    }
+                  }
+                  underlineColorAndroid="transparent"
+                />
+                <View
+                  accessible={true}
+                  focusable={true}
+                  isTVSelectable={true}
+                  onClick={[Function]}
+                  onResponderGrant={[Function]}
+                  onResponderMove={[Function]}
+                  onResponderRelease={[Function]}
+                  onResponderTerminate={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                  style={
+                    Object {
+                      "flex": 1,
+                      "justifyContent": "center",
+                      "opacity": 1,
+                      "paddingLeft": 5,
+                      "width": "20%",
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      Object {
+                        "alignItems": "flex-end",
+                        "paddingRight": 3,
+                      }
+                    }
+                  >
+                    <Text />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
