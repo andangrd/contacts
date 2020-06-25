@@ -17,14 +17,5 @@ describe('App API', () => {
         });
     });
 
-    describe('pathGenerator', () => {
-        test('should return path with only one start slash', () => {
-            const path = 'dumbPath';
-            const pathWithSlash = `/${path}`;
-            expect(AppApi.pathGenerator(path)).toBe(pathWithSlash);
-            expect(AppApi.pathGenerator(pathWithSlash)).toBe(pathWithSlash);
-        });
-    });
-
 
 });

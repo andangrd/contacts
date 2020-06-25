@@ -1,9 +1,9 @@
 import reducer, {
     actionTypes,
     initialState
-} from './Home.reducer';
+} from './Contact.reducer';
 
-describe('Home Redux Reducer', () => {
+describe('Contact Redux Reducer', () => {
     const spies = {
         goBack: jest.fn(),
         dispatch: jest.fn()
@@ -28,18 +28,6 @@ describe('Home Redux Reducer', () => {
             expect(state).toEqual(initialState);
             state = reducer(state, { type: '@@@@@@@' });
             expect(state).toEqual(initialState);
-        });
-    });
-
-    describe('handle HOME/SET_WELCOME_MESSAGE', () => {
-        test('HOME/SET_WELCOME_MESSAGE', () => {
-            expect(reducer(initialState, {
-                type: actionTypes.SET_WELCOME_MESSAGE,
-                payload: 'abcd'
-            })).toEqual({
-                ...initialState,
-                welcomeMessage: 'abcd'
-            });
         });
     });
 

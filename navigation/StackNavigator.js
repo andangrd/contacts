@@ -16,7 +16,7 @@ export function StactNavigator(props) {
     return (
         <Stack.Navigator>
 
-            <Stack.Screen name="contact" options={ { title: 'Contacts' } } component={ HomeScreen } />
+            <Stack.Screen name="root" options={ { title: 'Contacts' } } component={ HomeScreen } />
             <Stack.Screen name={ Screens.HomeScreen } options={ { title: 'Contacts' } } component={ HomeScreen } />
             <Stack.Screen
                 name={ Screens.ContacDetails }

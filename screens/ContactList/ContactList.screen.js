@@ -71,7 +71,7 @@ const DeletButton = (props) => {
     return (<Button
         color={ Colors.diiOrangeRed }
         title='Delete'
-        onPress={ () => props.deleteContact(props.contactId).then(() => refreshScreen()) }
+        onPress={ () => props.deleteContact(props.contactId).then(() => props.refreshScreen()) }
     />)
 }
 
